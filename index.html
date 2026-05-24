@@ -395,7 +395,8 @@ repeat(auto-fill,minmax(72px,1fr));
 
 <iframe
 id="street"
-allowfullscreen>
+allowfullscreen
+loading="eager">
 </iframe>
 
 <div class="scan"></div>
@@ -591,34 +592,30 @@ TOKYO
 
 const cities=[
 
-"Tokyo","Kyiv","New York","London","Paris","Berlin","Rome",
-"Barcelona","Dubai","Istanbul","Bangkok","Singapore","Seoul",
-"Sydney","Toronto","Cairo","Mumbai","Shanghai","Los Angeles",
-"Chicago","Lviv","Odessa","Kharkiv","Dnipro","Warsaw","Prague",
-"Vienna","Amsterdam","Brussels","Copenhagen","Stockholm",
-"Helsinki","Oslo","Lisbon","Madrid","Valencia","Seville",
-"Milan","Naples","Florence","Munich","Hamburg","Frankfurt",
-"Zurich","Budapest","Athens","Bucharest","Sofia","Belgrade",
-"Zagreb","Sarajevo","Skopje","Tirana","Reykjavik","Dublin",
-"Edinburgh","Manchester","Liverpool","Glasgow","Birmingham",
-"San Francisco","Seattle","Miami","Boston","Houston","Dallas",
-"Atlanta","Detroit","Phoenix","Las Vegas","Portland","Denver",
-"Mexico City","Rio de Janeiro","Sao Paulo","Buenos Aires",
-"Lima","Santiago","Bogota","Caracas","Havana","Panama City",
-"Cape Town","Johannesburg","Nairobi","Lagos","Casablanca",
-"Tunis","Algiers","Jerusalem","Tel Aviv","Doha","Riyadh",
-"Tehran","Baghdad","Karachi","Delhi","Kathmandu","Hong Kong",
-"Taipei","Jakarta","Beijing","Osaka","Nagoya","Fukuoka",
-"Busan","Manila","Kuala Lumpur","Ho Chi Minh City","Hanoi",
-"Shenzhen","Guangzhou","Chengdu","Wuhan","Chongqing",
-"Tianjin","Melbourne","Perth","Auckland","Vancouver",
-"Montreal","Ottawa","Philadelphia","San Diego","Orlando",
-"Charlotte","Minneapolis","Salt Lake City","Anchorage",
-"Brasilia","Recife","Medellin","Quito","La Paz","Montevideo",
-"Kingston","San Juan","Abu Dhabi","Kuwait City","Muscat",
-"Amman","Beirut","Damascus","Tbilisi","Yerevan","Baku",
-"Moscow","Saint Petersburg","Kazan","Ulaanbaatar",
-"Islamabad","Lahore","Dhaka"
+"Tokyo",
+"Kyiv",
+"New York",
+"London",
+"Paris",
+"Berlin",
+"Rome",
+"Barcelona",
+"Dubai",
+"Istanbul",
+"Bangkok",
+"Singapore",
+"Seoul",
+"Sydney",
+"Toronto",
+"Cairo",
+"Mumbai",
+"Shanghai",
+"Los Angeles",
+"Chicago",
+"Lviv",
+"Odessa",
+"Kharkiv",
+"Dnipro"
 
 ];
 
@@ -626,41 +623,30 @@ const cities=[
 
 const cityData={
 
-Tokyo:{
-coords:[35.6895,139.6917],
-temp:"+24°C",
-weather:"clear sky",
-air:"38 AQI",
-airText:"good quality",
-population:"37M"
-},
-
-Kyiv:{
-coords:[50.4501,30.5234],
-temp:"+20°C",
-weather:"cloudy",
-air:"52 AQI",
-airText:"moderate quality",
-population:"3M"
-},
-
-London:{
-coords:[51.5072,-0.1276],
-temp:"+17°C",
-weather:"rain",
-air:"48 AQI",
-airText:"stable quality",
-population:"9M"
-},
-
-Paris:{
-coords:[48.8566,2.3522],
-temp:"+21°C",
-weather:"clear sky",
-air:"41 AQI",
-airText:"good quality",
-population:"11M"
-}
+Tokyo:{coords:[35.6895,139.6917],temp:"+24°C",weather:"clear sky",air:"38 AQI",airText:"good quality",population:"37M"},
+Kyiv:{coords:[50.4501,30.5234],temp:"+20°C",weather:"cloudy",air:"52 AQI",airText:"moderate quality",population:"3M"},
+NewYork:{coords:[40.7128,-74.0060],temp:"+23°C",weather:"sunny",air:"48 AQI",airText:"stable quality",population:"19M"},
+London:{coords:[51.5072,-0.1276],temp:"+17°C",weather:"rain",air:"48 AQI",airText:"stable quality",population:"9M"},
+Paris:{coords:[48.8566,2.3522],temp:"+21°C",weather:"clear sky",air:"41 AQI",airText:"good quality",population:"11M"},
+Berlin:{coords:[52.5200,13.4050],temp:"+18°C",weather:"cloudy",air:"39 AQI",airText:"good quality",population:"6M"},
+Rome:{coords:[41.9028,12.4964],temp:"+26°C",weather:"sunny",air:"42 AQI",airText:"good quality",population:"4M"},
+Barcelona:{coords:[41.3874,2.1686],temp:"+27°C",weather:"clear sky",air:"43 AQI",airText:"good quality",population:"5M"},
+Dubai:{coords:[25.2048,55.2708],temp:"+36°C",weather:"hot",air:"74 AQI",airText:"moderate quality",population:"3M"},
+Istanbul:{coords:[41.0082,28.9784],temp:"+25°C",weather:"warm",air:"61 AQI",airText:"moderate quality",population:"15M"},
+Bangkok:{coords:[13.7563,100.5018],temp:"+33°C",weather:"humid",air:"82 AQI",airText:"moderate quality",population:"11M"},
+Singapore:{coords:[1.3521,103.8198],temp:"+31°C",weather:"humid",air:"47 AQI",airText:"good quality",population:"6M"},
+Seoul:{coords:[37.5665,126.9780],temp:"+22°C",weather:"clear sky",air:"51 AQI",airText:"moderate quality",population:"10M"},
+Sydney:{coords:[-33.8688,151.2093],temp:"+19°C",weather:"windy",air:"27 AQI",airText:"excellent quality",population:"5M"},
+Toronto:{coords:[43.6532,-79.3832],temp:"+18°C",weather:"cloudy",air:"34 AQI",airText:"good quality",population:"6M"},
+Cairo:{coords:[30.0444,31.2357],temp:"+35°C",weather:"dry",air:"97 AQI",airText:"polluted",population:"21M"},
+Mumbai:{coords:[19.0760,72.8777],temp:"+32°C",weather:"humid",air:"104 AQI",airText:"polluted",population:"20M"},
+Shanghai:{coords:[31.2304,121.4737],temp:"+28°C",weather:"foggy",air:"65 AQI",airText:"moderate quality",population:"26M"},
+LosAngeles:{coords:[34.0522,-118.2437],temp:"+28°C",weather:"sunny",air:"55 AQI",airText:"moderate quality",population:"13M"},
+Chicago:{coords:[41.8781,-87.6298],temp:"+19°C",weather:"windy",air:"40 AQI",airText:"good quality",population:"9M"},
+Lviv:{coords:[49.8397,24.0297],temp:"+18°C",weather:"rain",air:"41 AQI",airText:"good quality",population:"1M"},
+Odessa:{coords:[46.4825,30.7233],temp:"+22°C",weather:"clear sky",air:"49 AQI",airText:"stable quality",population:"1M"},
+Kharkiv:{coords:[49.9935,36.2304],temp:"+19°C",weather:"cloudy",air:"54 AQI",airText:"moderate quality",population:"1M"},
+Dnipro:{coords:[48.4647,35.0462],temp:"+21°C",weather:"warm",air:"59 AQI",airText:"moderate quality",population:"1M"}
 
 };
 
@@ -672,7 +658,17 @@ const cityPopup=document.getElementById('cityPopup');
 let currentIndex=0;
 let autoWalkInterval=null;
 
-/* ===== TOGGLE CITIES ===== */
+/* ===== KEY ===== */
+
+function cityKey(city){
+
+return city
+.replace(/\s/g,'')
+.replace(/-/g,'');
+
+}
+
+/* ===== TOGGLE ===== */
 
 function toggleCities(){
 
@@ -718,26 +714,42 @@ cityPopup.appendChild(div);
 
 }
 
-/* ===== OPEN STREET ===== */
+/* ===== URL ===== */
+
+function buildStreet(lat,lng,heading=0,zoom=0){
+
+return `https://maps.google.com/maps?q=&layer=c&cbll=${lat},${lng}&cbp=11,${heading},0,${zoom},0&output=svembed`;
+
+}
+
+/* ===== OPEN ===== */
 
 function openStreet(city,index){
 
 currentIndex=index;
 
+const key=cityKey(city);
+
 const data=
-cityData[city] || cityData["Tokyo"];
+cityData[key] || cityData["Tokyo"];
 
 const lat=data.coords[0];
 const lng=data.coords[1];
 
 const rLat=
-(lat+(Math.random()-.5)/100).toFixed(6);
+(lat+(Math.random()-.5)/500).toFixed(6);
 
 const rLng=
-(lng+(Math.random()-.5)/100).toFixed(6);
+(lng+(Math.random()-.5)/500).toFixed(6);
+
+frame.src="about:blank";
+
+setTimeout(()=>{
 
 frame.src=
-`https://www.google.com/maps?q=&layer=c&cbll=${rLat},${rLng}&cbp=11,0,0,0,0&output=svembed`;
+buildStreet(rLat,rLng);
+
+},100);
 
 document.getElementById('cityTitle').innerText=
 city.toUpperCase();
@@ -778,13 +790,65 @@ cityPopup.style.display="grid";
 }
 
 /* ===== RANDOM ===== */
+/* ===== FIXED ===== */
+/* RANDOM NOW MOVES INSIDE CURRENT CITY */
 
 function randomStreet(){
 
-openStreet(
-cities[Math.floor(Math.random()*cities.length)],
-0
-);
+const city=
+cities[currentIndex];
+
+const key=
+cityKey(city);
+
+const data=
+cityData[key] || cityData["Tokyo"];
+
+const lat=data.coords[0];
+const lng=data.coords[1];
+
+/* BIGGER RANDOM AREA */
+
+const rLat=
+(lat+(Math.random()-.5)/80).toFixed(6);
+
+const rLng=
+(lng+(Math.random()-.5)/80).toFixed(6);
+
+const headings=[0,45,90,135,180,225,270,315];
+
+const heading=
+headings[
+Math.floor(Math.random()*headings.length)
+];
+
+const zooms=[0,1,2,3];
+
+const zoom=
+zooms[
+Math.floor(Math.random()*zooms.length)
+];
+
+frame.src="about:blank";
+
+setTimeout(()=>{
+
+frame.src=
+buildStreet(rLat,rLng,heading,zoom);
+
+},100);
+
+document.getElementById('guide').innerHTML=
+`
+RANDOM TELEPORT<br>
+same megacity sector
+`;
+
+document.getElementById('walk').innerHTML=
+`
+LOCATION SHIFT<br>
+new urban point
+`;
 
 }
 
@@ -824,8 +888,11 @@ autoWalkInterval=setInterval(()=>{
 const city=
 cities[currentIndex];
 
+const key=
+cityKey(city);
+
 const data=
-cityData[city] || cityData["Tokyo"];
+cityData[key] || cityData["Tokyo"];
 
 const lat=data.coords[0];
 const lng=data.coords[1];
@@ -851,7 +918,7 @@ const rLng=
 (lng+(Math.random()-.5)/300).toFixed(6);
 
 frame.src=
-`https://www.google.com/maps?q=&layer=c&cbll=${rLat},${rLng}&cbp=11,${heading},0,${zoom},0&output=svembed`;
+buildStreet(rLat,rLng,heading,zoom);
 
 const routes=[
 
@@ -1026,6 +1093,8 @@ location.reload();
 }
 
 /* ===== START ===== */
+
+renderCities(cities);
 
 openStreet("Tokyo",0);
 
