@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>MEGACITY 175 ULTRA</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html,body{
+width:100%;
+height:100%;
+overflow:hidden;
+font-family:'Inter',sans-serif;
+background:#000;
+color:white;
+}
+
+/* ===== MAP ===== */
+
+.viewer{
+position:relative;
+width:100%;
+height:100vh;
+overflow:hidden;
+background:black;
+}
+
+iframe{
+width:100%;
+height:100%;
+border:none;
+transition:1s;
+}
+
+/* ===== OVERLAYS ===== */
+
+.scan{
+position:absolute;
+inset:0;
+pointer-events:none;
+
+background:
+repeating-linear-gradient(
+to bottom,
+rgba(255,255,255,.03) 0px,
+rgba(255,255,255,.03) 1px,
+transparent 2px,
+transparent 4px
+);
+
+mix-blend-mode:screen;
+opacity:.15;
+}
+
+.vignette{
+position:absolute;
+inset:0;
+pointer-events:none;
+
+background:
+radial-gradient(
+circle at center,
+transparent 35%,
+rgba(0,0,0,.45)
+);
+}
+
+/* ===== TOP BAR ===== */
+
+.topbar{
+position:absolute;
+top:25px;
+left:50%;
+transform:translateX(-50%);
+width:92%;
+height:90px;
+
+background:rgba(0,0,0,.45);
+backdrop-filter:blur(18px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:30px;
+
+display:flex;
+align-items:center;
+padding:0 25px;
+gap:22px;
+
+z-index:20;
+}
+
+/* ===== LOGO ===== */
+
+.logo{
+font-size:34px;
+font-weight:900;
+letter-spacing:2px;
+white-space:nowrap;
+}
+
+/* ===== SEARCH ===== */
+
+.search{
+flex:1;
+height:58px;
+
+border:none;
+outline:none;
+
+background:#111;
+
+border-radius:18px;
+
+padding:0 22px;
+
+font-size:18px;
+color:white;
+}
+
+/* ===== CITY SELECT ===== */
+
+.city-select{
+display:flex;
+gap:14px;
+overflow-x:auto;
+scrollbar-width:none;
+}
+
+.city-select::-webkit-scrollbar{
+display:none;
+}
+
+.city{
+min-width:max-content;
+
+padding:16px 24px;
+
+background:#121212;
+
+border:
+1px solid rgba(255,255,255,.06);
+
+border-radius:18px;
+
+cursor:pointer;
+
+font-size:18px;
+font-weight:700;
+
+transition:.25s;
+}
+
+.city:hover{
+transform:translateY(-4px);
+background:#1b1b1b;
+}
+
+/* ===== LEFT MENU ===== */
+
+.left-menu{
+position:absolute;
+left:25px;
+top:140px;
+
+display:flex;
+flex-direction:column;
+gap:14px;
+
+z-index:20;
+}
+
+/* ===== BUTTON ===== */
+
+.mode-btn{
+width:180px;
+height:58px;
+
+border:none;
+
+background:rgba(0,0,0,.45);
+
+backdrop-filter:blur(14px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:18px;
+
+color:white;
+
+font-size:15px;
+font-weight:700;
+
+cursor:pointer;
+
+transition:.25s;
+}
+
+.mode-btn:hover{
+transform:translateX(6px);
+background:rgba(20,20,20,.9);
+}
+
+/* ===== STATUS ===== */
+
+.status{
+position:absolute;
+
+bottom:28px;
+left:28px;
+
+padding:18px 22px;
+
+background:rgba(0,0,0,.45);
+
+backdrop-filter:blur(14px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:22px;
+
+font-size:15px;
+line-height:1.7;
+
+z-index:20;
+}
+
+/* ===== CITY LABEL ===== */
+
+.city-label{
+position:absolute;
+
+right:35px;
+bottom:35px;
+
+font-size:64px;
+font-weight:900;
+
+letter-spacing:2px;
+
+text-shadow:
+0 0 25px rgba(255,255,255,.18);
+
+z-index:20;
+}
+
+/* ===== MODES ===== */
+
+.glitch{
+animation:glitch .15s infinite;
+}
+
+@keyframes glitch{
+
+0%{
+transform:translate(0);
+}
+
+25%{
+transform:translate(2px,-2px);
+}
+
+50%{
+transform:translate(-2px,2px);
+}
+
+75%{
+transform:translate(2px,2px);
+}
+
+100%{
+transform:translate(0);
+}
+
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:1000px){
+
+.topbar{
+height:auto;
+padding:18px;
+flex-direction:column;
+align-items:stretch;
+gap:14px;
+}
+
+.logo{
+font-size:24px;
+}
+
+.search{
+height:52px;
+font-size:16px;
+}
+
+.city{
+font-size:15px;
+padding:12px 18px;
+}
+
+.left-menu{
+top:auto;
+bottom:120px;
+left:15px;
+}
+
+.mode-btn{
+width:150px;
+height:52px;
+font-size:13px;
+}
+
+.city-label{
+font-size:42px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="viewer">
+
+<!-- STREET VIEW -->
+
+<iframe
+id="street"
+allowfullscreen>
+</iframe>
+
+<div class="scan"></div>
+<div class="vignette"></div>
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+
+<div class="logo">
+MEGACITY 175
+</div>
+
+<input
+class="search"
+type="text"
+placeholder="Пошук мегаполіса..."
+onkeyup="filterCities(this.value)"
+>
+
+<div class="city-select" id="citySelect"></div>
+
+</div>
+
+<!-- LEFT MENU -->
+
+<div class="left-menu">
+
+<button class="mode-btn" onclick="randomStreet()">
+RANDOM STREET
+</button>
+
+<button class="mode-btn" onclick="nextCity()">
+NEXT CITY
+</button>
+
+<button class="mode-btn" onclick="nightMode()">
+NIGHT MODE
+</button>
+
+<button class="mode-btn" onclick="cinemaMode()">
+CINEMA MODE
+</button>
+
+<button class="mode-btn" onclick="matrixMode()">
+MATRIX MODE
+</button>
+
+<button class="mode-btn" onclick="vhsMode()">
+VHS MODE
+</button>
+
+<button class="mode-btn" onclick="cyberpunkMode()">
+CYBERPUNK
+</button>
+
+<button class="mode-btn" onclick="droneMode()">
+DRONE MODE
+</button>
+
+<button class="mode-btn" onclick="resetMode()">
+RESET
+</button>
+
+</div>
+
+<!-- STATUS -->
+
+<div class="status" id="status">
+SYSTEM ONLINE<br>
+3D STREET NODE CONNECTED
+</div>
+
+<!-- CITY -->
+
+<div class="city-label" id="cityLabel">
+TOKYO
+</div>
+
+</div>
+
+<script>
+
+/* ===== CITIES ===== */
+
+const cities=[
+
+"Tokyo",
+"Kyiv",
+"New York",
+"London",
+"Paris",
+"Berlin",
+"Rome",
+"Barcelona",
+"Amsterdam",
+"Prague",
+"Warsaw",
+"Dubai",
+"Istanbul",
+"Bangkok",
+"Singapore",
+"Seoul",
+"Hong Kong",
+"Sydney",
+"Toronto",
+"Rio de Janeiro",
+"Mexico City",
+"Cairo",
+"Mumbai",
+"Shanghai",
+"Los Angeles",
+"Chicago",
+"San Francisco",
+"Miami",
+"Lviv",
+"Odessa",
+"Kharkiv"
+
+];
+
+/* ===== COORDS ===== */
+
+const coords={
+
+Tokyo:[35.6895,139.6917],
+Kyiv:[50.4501,30.5234],
+"New York":[40.7128,-74.0060],
+London:[51.5072,-0.1276],
+Paris:[48.8566,2.3522],
+Berlin:[52.52,13.405],
+Rome:[41.9028,12.4964],
+Barcelona:[41.3874,2.1686],
+Amsterdam:[52.3676,4.9041],
+Prague:[50.0755,14.4378],
+Warsaw:[52.2297,21.0122],
+Dubai:[25.2048,55.2708],
+Istanbul:[41.0082,28.9784],
+Bangkok:[13.7563,100.5018],
+Singapore:[1.3521,103.8198],
+Seoul:[37.5665,126.9780],
+"Hong Kong":[22.3193,114.1694],
+Sydney:[-33.8688,151.2093],
+Toronto:[43.6532,-79.3832],
+"Rio de Janeiro":[-22.9068,-43.1729],
+"Mexico City":[19.4326,-99.1332],
+Cairo:[30.0444,31.2357],
+Mumbai:[19.0760,72.8777],
+Shanghai:[31.2304,121.4737],
+"Los Angeles":[34.0522,-118.2437],
+Chicago:[41.8781,-87.6298],
+"San Francisco":[37.7749,-122.4194],
+Miami:[25.7617,-80.1918],
+Lviv:[49.8397,24.0297],
+Odessa:[46.4825,30.7233],
+Kharkiv:[49.9935,36.2304]
+
+};
+
+/* ===== ELEMENTS ===== */
+
+const frame=document.getElementById('street');
+
+const citySelect=document.getElementById('citySelect');
+
+let currentIndex=0;
+
+/* ===== RENDER ===== */
+
+function renderCities(list){
+
+citySelect.innerHTML='';
+
+list.forEach((city,index)=>{
+
+const div=document.createElement('div');
+
+div.className='city';
+
+div.innerText=city;
+
+div.onclick=()=>openStreet(city,index);
+
+citySelect.appendChild(div);
+
+});
+
+}
+
+renderCities(cities);
+
+/* ===== OPEN STREET ===== */
+
+function openStreet(city,index){
+
+currentIndex=index;
+
+const lat=coords[city][0];
+const lng=coords[city][1];
+
+const rLat=
+(lat+(Math.random()-.5)/100).toFixed(6);
+
+const rLng=
+(lng+(Math.random()-.5)/100).toFixed(6);
+
+frame.src=
+`https://www.google.com/maps?q=&layer=c&cbll=${rLat},${rLng}&cbp=11,0,0,0,0&output=svembed`;
+
+document.getElementById('cityLabel').innerText=
+city.toUpperCase();
+
+document.getElementById('status').innerHTML=
+`
+CONNECTED: ${city}<br>
+3D PANORAMA ACTIVE
+`;
+
+}
+
+/* ===== SEARCH ===== */
+
+function filterCities(text){
+
+const filtered=cities.filter(city=>
+city.toLowerCase().includes(text.toLowerCase())
+);
+
+renderCities(filtered);
+
+}
+
+/* ===== RANDOM ===== */
+
+function randomStreet(){
+
+openStreet(
+cities[currentIndex],
+currentIndex
+);
+
+}
+
+/* ===== NEXT ===== */
+
+function nextCity(){
+
+currentIndex++;
+
+if(currentIndex>=cities.length){
+
+currentIndex=0;
+
+}
+
+openStreet(
+cities[currentIndex],
+currentIndex
+);
+
+}
+
+/* ===== MODES ===== */
+
+function nightMode(){
+
+frame.style.filter=
+'brightness(.55) contrast(1.3) saturate(.8)';
+
+}
+
+function cinemaMode(){
+
+frame.style.filter=
+'contrast(1.15) saturate(1.2) brightness(.95)';
+
+}
+
+function matrixMode(){
+
+frame.style.filter=
+'hue-rotate(90deg) saturate(1.5) brightness(.8)';
+
+document.body.classList.add('glitch');
+
+}
+
+function vhsMode(){
+
+document.querySelector('.scan').style.opacity='.35';
+
+frame.style.filter=
+'contrast(1.3) saturate(.6) blur(.3px)';
+
+}
+
+function cyberpunkMode(){
+
+frame.style.filter=
+'hue-rotate(-40deg) saturate(1.8) contrast(1.2)';
+
+}
+
+function droneMode(){
+
+frame.style.filter=
+'grayscale(.4) contrast(1.5) brightness(.9)';
+
+}
+
+/* ===== RESET ===== */
+
+function resetMode(){
+
+location.reload();
+
+}
+
+/* ===== START ===== */
+
+openStreet("Tokyo",0);
+
+</script>
+
+</body>
+</html>
