@@ -40,9 +40,10 @@ width:100%;
 height:100%;
 border:none;
 transition:1s;
+filter:contrast(1.1);
 }
 
-/* ===== OVERLAY ===== */
+/* ===== EFFECTS ===== */
 
 .scan{
 position:absolute;
@@ -51,14 +52,15 @@ inset:0;
 background:
 repeating-linear-gradient(
 to bottom,
-rgba(255,255,255,.025) 0px,
-rgba(255,255,255,.025) 1px,
+rgba(255,255,255,.02) 0px,
+rgba(255,255,255,.02) 1px,
 transparent 2px,
 transparent 4px
 );
 
-opacity:.12;
+opacity:.18;
 mix-blend-mode:screen;
+
 pointer-events:none;
 }
 
@@ -81,17 +83,17 @@ pointer-events:none;
 .topbar{
 position:absolute;
 
-top:12px;
+top:10px;
 left:50%;
 
 transform:translateX(-50%);
 
-width:97%;
-height:62px;
+width:98%;
+height:58px;
 
-background:rgba(0,0,0,.28);
+background:rgba(0,0,0,.22);
 
-backdrop-filter:blur(12px);
+backdrop-filter:blur(14px);
 
 border:
 1px solid rgba(255,255,255,.05);
@@ -100,11 +102,18 @@ border-radius:18px;
 
 display:flex;
 align-items:center;
-gap:10px;
+gap:8px;
 
 padding:0 12px;
 
-z-index:100;
+overflow-x:auto;
+scrollbar-width:none;
+
+z-index:200;
+}
+
+.topbar::-webkit-scrollbar{
+display:none;
 }
 
 /* ===== LOGO ===== */
@@ -114,12 +123,13 @@ font-size:16px;
 font-weight:900;
 letter-spacing:1px;
 white-space:nowrap;
+margin-right:10px;
 }
 
 /* ===== SEARCH ===== */
 
 .search{
-flex:1;
+width:180px;
 height:34px;
 
 background:#111;
@@ -133,70 +143,18 @@ padding:0 12px;
 
 font-size:12px;
 color:white;
+
+flex:none;
 }
 
-/* ===== CITYS ===== */
+/* ===== TOP BUTTON ===== */
 
-.citys{
-display:flex;
-gap:8px;
+.topbtn{
+height:32px;
 
-overflow-x:auto;
+padding:0 12px;
 
-scrollbar-width:none;
-}
-
-.citys::-webkit-scrollbar{
-display:none;
-}
-
-.city{
-padding:7px 12px;
-
-background:#101010;
-
-border:
-1px solid rgba(255,255,255,.04);
-
-border-radius:10px;
-
-cursor:pointer;
-
-font-size:11px;
-font-weight:700;
-
-transition:.2s;
-
-white-space:nowrap;
-}
-
-.city:hover{
-background:#1a1a1a;
-}
-
-/* ===== LEFT ===== */
-
-.left{
-position:absolute;
-
-left:10px;
-top:84px;
-
-display:grid;
-grid-template-columns:1fr 1fr;
-
-gap:6px;
-
-z-index:100;
-}
-
-/* ===== BUTTON ===== */
-
-.btn{
-width:108px;
-height:34px;
-
-background:rgba(0,0,0,.26);
+background:rgba(0,0,0,.24);
 
 backdrop-filter:blur(8px);
 
@@ -213,19 +171,99 @@ font-weight:700;
 cursor:pointer;
 
 transition:.2s;
+
+white-space:nowrap;
+
+flex:none;
 }
 
-.btn:hover{
-background:#161616;
+.topbtn:hover{
+background:#1b1b1b;
 }
 
-/* ===== RIGHT ===== */
+/* ===== CITY POPUP ===== */
+
+.city-popup{
+
+position:absolute;
+
+top:70px;
+left:50%;
+
+transform:translateX(-50%);
+
+width:95%;
+max-height:74vh;
+
+overflow:auto;
+
+padding:12px;
+
+display:none;
+
+grid-template-columns:
+repeat(auto-fill,minmax(95px,1fr));
+
+gap:6px;
+
+background:rgba(0,0,0,.38);
+
+backdrop-filter:blur(20px);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+border-radius:18px;
+
+z-index:300;
+
+scrollbar-width:none;
+}
+
+.city-popup::-webkit-scrollbar{
+display:none;
+}
+
+/* ===== CITY ===== */
+
+.city{
+display:flex;
+align-items:center;
+justify-content:center;
+
+height:34px;
+
+font-size:9px;
+font-weight:700;
+
+background:rgba(255,255,255,.04);
+
+border:
+1px solid rgba(255,255,255,.04);
+
+border-radius:10px;
+
+cursor:pointer;
+
+transition:.2s;
+
+text-align:center;
+
+padding:0 8px;
+}
+
+.city:hover{
+background:#1b1b1b;
+transform:scale(1.03);
+}
+
+/* ===== RIGHT INFO ===== */
 
 .right{
 position:absolute;
 
 right:10px;
-top:84px;
+top:82px;
 
 width:170px;
 
@@ -233,17 +271,17 @@ display:flex;
 flex-direction:column;
 gap:8px;
 
-z-index:100;
+z-index:150;
 }
 
-/* ===== CITY TITLE ===== */
+/* ===== TITLE ===== */
 
 .city-title{
 font-size:18px;
 font-weight:900;
 line-height:1;
+
 text-align:right;
-margin-bottom:2px;
 }
 
 /* ===== INFO ===== */
@@ -282,7 +320,7 @@ text-align:right;
 opacity:.75;
 }
 
-/* ===== WALK ===== */
+/* ===== STATUS ===== */
 
 .walk{
 position:absolute;
@@ -292,7 +330,7 @@ bottom:10px;
 
 padding:10px 14px;
 
-background:rgba(0,0,0,.28);
+background:rgba(0,0,0,.24);
 
 backdrop-filter:blur(10px);
 
@@ -323,51 +361,25 @@ opacity:.12;
 pointer-events:none;
 }
 
-/* ===== GLITCH ===== */
-
-.glitch{
-animation:glitch .15s infinite;
-}
-
-@keyframes glitch{
-
-0%{
-transform:translate(0);
-}
-
-25%{
-transform:translate(2px,-2px);
-}
-
-50%{
-transform:translate(-2px,2px);
-}
-
-75%{
-transform:translate(2px,2px);
-}
-
-100%{
-transform:translate(0);
-}
-
-}
-
 /* ===== MOBILE ===== */
 
 @media(max-width:900px){
+
+.right{
+width:140px;
+}
 
 .bigcity{
 display:none;
 }
 
-.btn{
-width:92px;
-font-size:8px;
+.search{
+width:120px;
 }
 
-.right{
-width:140px;
+.city-popup{
+grid-template-columns:
+repeat(auto-fill,minmax(72px,1fr));
 }
 
 }
@@ -400,58 +412,81 @@ IBONARIUM RENDER
 <input
 class="search"
 type="text"
-placeholder="Пошук мегаполіса..."
+placeholder="Пошук..."
 onkeyup="filterCities(this.value)"
 >
 
-<div class="citys" id="citys"></div>
+<button class="topbtn" onclick="toggleCities()">
+MEGACITIES
+</button>
 
-</div>
-
-<!-- LEFT -->
-
-<div class="left">
-
-<button class="btn" onclick="randomStreet()">
+<button class="topbtn" onclick="randomStreet()">
 RANDOM
 </button>
 
-<button class="btn" onclick="nextCity()">
+<button class="topbtn" onclick="nextCity()">
 NEXT
 </button>
 
-<button class="btn" onclick="autoWalk()">
+<button class="topbtn" onclick="autoWalk()">
 AUTO WALK
 </button>
 
-<button class="btn" onclick="stopWalk()">
-STOP WALK
+<button class="topbtn" onclick="stopWalk()">
+STOP
 </button>
 
-<button class="btn" onclick="nightMode()">
+<button class="topbtn" onclick="nightMode()">
 NIGHT
 </button>
 
-<button class="btn" onclick="cinemaMode()">
+<button class="topbtn" onclick="cinemaMode()">
 CINEMA
 </button>
 
-<button class="btn" onclick="matrixMode()">
+<button class="topbtn" onclick="matrixMode()">
 MATRIX
 </button>
 
-<button class="btn" onclick="cyberpunkMode()">
+<button class="topbtn" onclick="cyberpunkMode()">
 CYBER
 </button>
 
-<button class="btn" onclick="droneMode()">
+<button class="topbtn" onclick="droneMode()">
 DRONE
 </button>
 
-<button class="btn" onclick="resetMode()">
+<button class="topbtn" onclick="infraMode()">
+INFRA
+</button>
+
+<button class="topbtn" onclick="grainMode()">
+GRAIN
+</button>
+
+<button class="topbtn" onclick="bwMode()">
+B&W
+</button>
+
+<button class="topbtn" onclick="neonMode()">
+NEON
+</button>
+
+<button class="topbtn" onclick="dreamMode()">
+DREAM
+</button>
+
+<button class="topbtn" onclick="resetMode()">
 RESET
 </button>
 
+</div>
+
+<!-- CITY POPUP -->
+
+<div
+class="city-popup"
+id="cityPopup">
 </div>
 
 <!-- RIGHT -->
@@ -529,7 +564,7 @@ standby...
 
 </div>
 
-<!-- WALK -->
+<!-- STATUS -->
 
 <div
 class="walk"
@@ -552,115 +587,42 @@ TOKYO
 
 <script>
 
-/* ===== 100 CITIES ===== */
+/* ===== CITIES ===== */
 
 const cities=[
 
-"Tokyo",
-"Kyiv",
-"New York",
-"London",
-"Paris",
-"Berlin",
-"Rome",
-"Barcelona",
-"Dubai",
-"Istanbul",
-"Bangkok",
-"Singapore",
-"Seoul",
-"Sydney",
-"Toronto",
-"Cairo",
-"Mumbai",
-"Shanghai",
-"Los Angeles",
-"Chicago",
-"Lviv",
-"Odessa",
-"Kharkiv",
-"Dnipro",
-"Warsaw",
-"Prague",
-"Vienna",
-"Amsterdam",
-"Brussels",
-"Copenhagen",
-"Stockholm",
-"Helsinki",
-"Oslo",
-"Lisbon",
-"Madrid",
-"Valencia",
-"Seville",
-"Milan",
-"Naples",
-"Florence",
-"Munich",
-"Hamburg",
-"Frankfurt",
-"Zurich",
-"Budapest",
-"Athens",
-"Bucharest",
-"Sofia",
-"Belgrade",
-"Zagreb",
-"Sarajevo",
-"Skopje",
-"Tirana",
-"Reykjavik",
-"Dublin",
-"Edinburgh",
-"Manchester",
-"Liverpool",
-"Glasgow",
-"Birmingham",
-"San Francisco",
-"Seattle",
-"Miami",
-"Boston",
-"Houston",
-"Dallas",
-"Atlanta",
-"Detroit",
-"Phoenix",
-"Las Vegas",
-"Portland",
-"Denver",
-"Mexico City",
-"Rio de Janeiro",
-"Sao Paulo",
-"Buenos Aires",
-"Lima",
-"Santiago",
-"Bogota",
-"Caracas",
-"Havana",
-"Panama City",
-"Cape Town",
-"Johannesburg",
-"Nairobi",
-"Lagos",
-"Casablanca",
-"Tunis",
-"Algiers",
-"Jerusalem",
-"Tel Aviv",
-"Doha",
-"Riyadh",
-"Tehran",
-"Baghdad",
-"Karachi",
-"Delhi",
-"Kathmandu",
-"Hong Kong",
-"Taipei",
-"Jakarta"
+"Tokyo","Kyiv","New York","London","Paris","Berlin","Rome",
+"Barcelona","Dubai","Istanbul","Bangkok","Singapore","Seoul",
+"Sydney","Toronto","Cairo","Mumbai","Shanghai","Los Angeles",
+"Chicago","Lviv","Odessa","Kharkiv","Dnipro","Warsaw","Prague",
+"Vienna","Amsterdam","Brussels","Copenhagen","Stockholm",
+"Helsinki","Oslo","Lisbon","Madrid","Valencia","Seville",
+"Milan","Naples","Florence","Munich","Hamburg","Frankfurt",
+"Zurich","Budapest","Athens","Bucharest","Sofia","Belgrade",
+"Zagreb","Sarajevo","Skopje","Tirana","Reykjavik","Dublin",
+"Edinburgh","Manchester","Liverpool","Glasgow","Birmingham",
+"San Francisco","Seattle","Miami","Boston","Houston","Dallas",
+"Atlanta","Detroit","Phoenix","Las Vegas","Portland","Denver",
+"Mexico City","Rio de Janeiro","Sao Paulo","Buenos Aires",
+"Lima","Santiago","Bogota","Caracas","Havana","Panama City",
+"Cape Town","Johannesburg","Nairobi","Lagos","Casablanca",
+"Tunis","Algiers","Jerusalem","Tel Aviv","Doha","Riyadh",
+"Tehran","Baghdad","Karachi","Delhi","Kathmandu","Hong Kong",
+"Taipei","Jakarta","Beijing","Osaka","Nagoya","Fukuoka",
+"Busan","Manila","Kuala Lumpur","Ho Chi Minh City","Hanoi",
+"Shenzhen","Guangzhou","Chengdu","Wuhan","Chongqing",
+"Tianjin","Melbourne","Perth","Auckland","Vancouver",
+"Montreal","Ottawa","Philadelphia","San Diego","Orlando",
+"Charlotte","Minneapolis","Salt Lake City","Anchorage",
+"Brasilia","Recife","Medellin","Quito","La Paz","Montevideo",
+"Kingston","San Juan","Abu Dhabi","Kuwait City","Muscat",
+"Amman","Beirut","Damascus","Tbilisi","Yerevan","Baku",
+"Moscow","Saint Petersburg","Kazan","Ulaanbaatar",
+"Islamabad","Lahore","Dhaka"
 
 ];
 
-/* ===== DATA ===== */
+/* ===== CITY DATA ===== */
 
 const cityData={
 
@@ -704,21 +666,35 @@ population:"11M"
 
 /* ===== ELEMENTS ===== */
 
-const frame=
-document.getElementById('street');
-
-const citys=
-document.getElementById('citys');
+const frame=document.getElementById('street');
+const cityPopup=document.getElementById('cityPopup');
 
 let currentIndex=0;
-
 let autoWalkInterval=null;
+
+/* ===== TOGGLE CITIES ===== */
+
+function toggleCities(){
+
+if(cityPopup.style.display==="grid"){
+
+cityPopup.style.display="none";
+
+}else{
+
+cityPopup.style.display="grid";
+
+renderCities(cities);
+
+}
+
+}
 
 /* ===== RENDER ===== */
 
 function renderCities(list){
 
-citys.innerHTML='';
+cityPopup.innerHTML='';
 
 list.forEach((city,index)=>{
 
@@ -728,15 +704,19 @@ div.className='city';
 
 div.innerText=city;
 
-div.onclick=()=>openStreet(city,index);
+div.onclick=()=>{
 
-citys.appendChild(div);
+openStreet(city,index);
+
+cityPopup.style.display="none";
+
+};
+
+cityPopup.appendChild(div);
 
 });
 
 }
-
-renderCities(cities);
 
 /* ===== OPEN STREET ===== */
 
@@ -793,6 +773,8 @@ c.toLowerCase().includes(text.toLowerCase())
 
 renderCities(filtered);
 
+cityPopup.style.display="grid";
+
 }
 
 /* ===== RANDOM ===== */
@@ -800,8 +782,8 @@ renderCities(filtered);
 function randomStreet(){
 
 openStreet(
-cities[currentIndex],
-currentIndex
+cities[Math.floor(Math.random()*cities.length)],
+0
 );
 
 }
@@ -833,7 +815,7 @@ clearInterval(autoWalkInterval);
 
 document.getElementById('walk').innerHTML=
 `
-AI AUTO WALK ACTIVE<br>
+AUTO WALK ACTIVE<br>
 urban navigation...
 `;
 
@@ -848,18 +830,7 @@ cityData[city] || cityData["Tokyo"];
 const lat=data.coords[0];
 const lng=data.coords[1];
 
-const headings=[
-
-0,
-45,
-90,
-135,
-180,
-225,
-270,
-315
-
-];
+const headings=[0,45,90,135,180,225,270,315];
 
 const heading=
 headings[
@@ -930,7 +901,7 @@ manual control
 
 }
 
-/* ===== MODES ===== */
+/* ===== FILTERS ===== */
 
 function nightMode(){
 
@@ -942,30 +913,107 @@ frame.style.filter=
 function cinemaMode(){
 
 frame.style.filter=
-'contrast(1.15) saturate(1.2) brightness(.95)';
+'contrast(1.2) saturate(1.25) brightness(.92)';
 
 }
 
 function matrixMode(){
 
 frame.style.filter=
-'hue-rotate(90deg) saturate(1.5) brightness(.8)';
+`
+hue-rotate(90deg)
+contrast(1.6)
+brightness(.72)
+saturate(1.8)
+grayscale(.1)
+`;
 
-document.body.classList.add('glitch');
+document.querySelector('.scan').style.opacity='.32';
 
 }
 
 function cyberpunkMode(){
 
 frame.style.filter=
-'hue-rotate(-40deg) saturate(1.8) contrast(1.2)';
+`
+hue-rotate(-40deg)
+saturate(1.9)
+contrast(1.3)
+brightness(.92)
+`;
 
 }
 
 function droneMode(){
 
 frame.style.filter=
-'grayscale(.35) contrast(1.4)';
+`
+grayscale(.35)
+contrast(1.4)
+brightness(.92)
+`;
+
+}
+
+function infraMode(){
+
+frame.style.filter=
+`
+sepia(.6)
+contrast(1.5)
+brightness(.9)
+hue-rotate(-30deg)
+saturate(2)
+`;
+
+}
+
+function grainMode(){
+
+frame.style.filter=
+`
+contrast(1.4)
+brightness(.85)
+saturate(.6)
+blur(.3px)
+`;
+
+document.querySelector('.scan').style.opacity='.45';
+
+}
+
+function bwMode(){
+
+frame.style.filter=
+`
+grayscale(1)
+contrast(1.5)
+brightness(.9)
+`;
+
+}
+
+function neonMode(){
+
+frame.style.filter=
+`
+saturate(2.2)
+contrast(1.4)
+brightness(.9)
+hue-rotate(-15deg)
+`;
+
+}
+
+function dreamMode(){
+
+frame.style.filter=
+`
+brightness(1.1)
+contrast(.9)
+saturate(1.5)
+blur(1px)
+`;
 
 }
 
