@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>MEGACITY 175 ULTRA</title>
+<title>IBONARIUM RENDER</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 
@@ -20,12 +20,12 @@ html,body{
 width:100%;
 height:100%;
 overflow:hidden;
-font-family:'Inter',sans-serif;
 background:#000;
+font-family:'Inter',sans-serif;
 color:white;
 }
 
-/* ===== MAP ===== */
+/* ===== VIEWER ===== */
 
 .viewer{
 position:relative;
@@ -42,30 +42,29 @@ border:none;
 transition:1s;
 }
 
-/* ===== OVERLAYS ===== */
+/* ===== OVERLAY ===== */
 
 .scan{
 position:absolute;
 inset:0;
-pointer-events:none;
 
 background:
 repeating-linear-gradient(
 to bottom,
-rgba(255,255,255,.03) 0px,
-rgba(255,255,255,.03) 1px,
+rgba(255,255,255,.025) 0px,
+rgba(255,255,255,.025) 1px,
 transparent 2px,
 transparent 4px
 );
 
+opacity:.12;
 mix-blend-mode:screen;
-opacity:.15;
+pointer-events:none;
 }
 
 .vignette{
 position:absolute;
 inset:0;
-pointer-events:none;
 
 background:
 radial-gradient(
@@ -73,40 +72,47 @@ circle at center,
 transparent 35%,
 rgba(0,0,0,.45)
 );
+
+pointer-events:none;
 }
 
-/* ===== TOP BAR ===== */
+/* ===== TOPBAR ===== */
 
 .topbar{
 position:absolute;
-top:25px;
-left:50%;
-transform:translateX(-50%);
-width:92%;
-height:90px;
 
-background:rgba(0,0,0,.45);
-backdrop-filter:blur(18px);
+top:12px;
+left:50%;
+
+transform:translateX(-50%);
+
+width:97%;
+height:62px;
+
+background:rgba(0,0,0,.28);
+
+backdrop-filter:blur(12px);
 
 border:
-1px solid rgba(255,255,255,.08);
+1px solid rgba(255,255,255,.05);
 
-border-radius:30px;
+border-radius:18px;
 
 display:flex;
 align-items:center;
-padding:0 25px;
-gap:22px;
+gap:10px;
 
-z-index:20;
+padding:0 12px;
+
+z-index:100;
 }
 
 /* ===== LOGO ===== */
 
 .logo{
-font-size:34px;
+font-size:16px;
 font-weight:900;
-letter-spacing:2px;
+letter-spacing:1px;
 white-space:nowrap;
 }
 
@@ -114,150 +120,210 @@ white-space:nowrap;
 
 .search{
 flex:1;
-height:58px;
+height:34px;
+
+background:#111;
 
 border:none;
 outline:none;
 
-background:#111;
+border-radius:10px;
 
-border-radius:18px;
+padding:0 12px;
 
-padding:0 22px;
-
-font-size:18px;
+font-size:12px;
 color:white;
 }
 
-/* ===== CITY SELECT ===== */
+/* ===== CITYS ===== */
 
-.city-select{
+.citys{
 display:flex;
-gap:14px;
+gap:8px;
+
 overflow-x:auto;
+
 scrollbar-width:none;
 }
 
-.city-select::-webkit-scrollbar{
+.citys::-webkit-scrollbar{
 display:none;
 }
 
 .city{
-min-width:max-content;
+padding:7px 12px;
 
-padding:16px 24px;
-
-background:#121212;
+background:#101010;
 
 border:
-1px solid rgba(255,255,255,.06);
+1px solid rgba(255,255,255,.04);
 
-border-radius:18px;
+border-radius:10px;
 
 cursor:pointer;
 
-font-size:18px;
+font-size:11px;
 font-weight:700;
 
-transition:.25s;
+transition:.2s;
+
+white-space:nowrap;
 }
 
 .city:hover{
-transform:translateY(-4px);
-background:#1b1b1b;
+background:#1a1a1a;
 }
 
-/* ===== LEFT MENU ===== */
+/* ===== LEFT ===== */
 
-.left-menu{
+.left{
 position:absolute;
-left:25px;
-top:140px;
 
-display:flex;
-flex-direction:column;
-gap:14px;
+left:10px;
+top:84px;
 
-z-index:20;
+display:grid;
+grid-template-columns:1fr 1fr;
+
+gap:6px;
+
+z-index:100;
 }
 
 /* ===== BUTTON ===== */
 
-.mode-btn{
-width:180px;
-height:58px;
+.btn{
+width:108px;
+height:34px;
 
-border:none;
+background:rgba(0,0,0,.26);
 
-background:rgba(0,0,0,.45);
-
-backdrop-filter:blur(14px);
+backdrop-filter:blur(8px);
 
 border:
-1px solid rgba(255,255,255,.08);
+1px solid rgba(255,255,255,.05);
 
-border-radius:18px;
+border-radius:10px;
 
 color:white;
 
-font-size:15px;
+font-size:9px;
 font-weight:700;
 
 cursor:pointer;
 
-transition:.25s;
+transition:.2s;
 }
 
-.mode-btn:hover{
-transform:translateX(6px);
-background:rgba(20,20,20,.9);
+.btn:hover{
+background:#161616;
 }
 
-/* ===== STATUS ===== */
+/* ===== RIGHT ===== */
 
-.status{
+.right{
 position:absolute;
 
-bottom:28px;
-left:28px;
+right:10px;
+top:84px;
 
-padding:18px 22px;
+width:170px;
 
-background:rgba(0,0,0,.45);
+display:flex;
+flex-direction:column;
+gap:8px;
 
-backdrop-filter:blur(14px);
+z-index:100;
+}
+
+/* ===== CITY TITLE ===== */
+
+.city-title{
+font-size:18px;
+font-weight:900;
+line-height:1;
+text-align:right;
+margin-bottom:2px;
+}
+
+/* ===== INFO ===== */
+
+.info-line{
+text-align:right;
+line-height:1.45;
+}
+
+.label{
+font-size:9px;
+opacity:.45;
+letter-spacing:1px;
+}
+
+.value{
+font-size:14px;
+font-weight:800;
+}
+
+.small{
+font-size:10px;
+opacity:.6;
+}
+
+/* ===== GUIDE ===== */
+
+.guide{
+margin-top:8px;
+
+font-size:10px;
+line-height:1.5;
+
+text-align:right;
+
+opacity:.75;
+}
+
+/* ===== WALK ===== */
+
+.walk{
+position:absolute;
+
+left:10px;
+bottom:10px;
+
+padding:10px 14px;
+
+background:rgba(0,0,0,.28);
+
+backdrop-filter:blur(10px);
 
 border:
-1px solid rgba(255,255,255,.08);
+1px solid rgba(255,255,255,.05);
 
-border-radius:22px;
+border-radius:12px;
 
-font-size:15px;
-line-height:1.7;
+font-size:10px;
+line-height:1.5;
 
-z-index:20;
+z-index:100;
 }
 
-/* ===== CITY LABEL ===== */
+/* ===== BIG CITY ===== */
 
-.city-label{
+.bigcity{
 position:absolute;
 
-right:35px;
-bottom:35px;
+right:18px;
+bottom:18px;
 
-font-size:64px;
+font-size:40px;
 font-weight:900;
 
-letter-spacing:2px;
+opacity:.12;
 
-text-shadow:
-0 0 25px rgba(255,255,255,.18);
-
-z-index:20;
+pointer-events:none;
 }
 
-/* ===== MODES ===== */
+/* ===== GLITCH ===== */
 
 .glitch{
 animation:glitch .15s infinite;
@@ -289,44 +355,19 @@ transform:translate(0);
 
 /* ===== MOBILE ===== */
 
-@media(max-width:1000px){
+@media(max-width:900px){
 
-.topbar{
-height:auto;
-padding:18px;
-flex-direction:column;
-align-items:stretch;
-gap:14px;
+.bigcity{
+display:none;
 }
 
-.logo{
-font-size:24px;
+.btn{
+width:92px;
+font-size:8px;
 }
 
-.search{
-height:52px;
-font-size:16px;
-}
-
-.city{
-font-size:15px;
-padding:12px 18px;
-}
-
-.left-menu{
-top:auto;
-bottom:120px;
-left:15px;
-}
-
-.mode-btn{
-width:150px;
-height:52px;
-font-size:13px;
-}
-
-.city-label{
-font-size:42px;
+.right{
+width:140px;
 }
 
 }
@@ -338,7 +379,7 @@ font-size:42px;
 
 <div class="viewer">
 
-<!-- STREET VIEW -->
+<!-- STREET -->
 
 <iframe
 id="street"
@@ -348,12 +389,12 @@ allowfullscreen>
 <div class="scan"></div>
 <div class="vignette"></div>
 
-<!-- TOP BAR -->
+<!-- TOPBAR -->
 
 <div class="topbar">
 
 <div class="logo">
-MEGACITY 175
+IBONARIUM RENDER
 </div>
 
 <input
@@ -363,62 +404,147 @@ placeholder="Пошук мегаполіса..."
 onkeyup="filterCities(this.value)"
 >
 
-<div class="city-select" id="citySelect"></div>
+<div class="citys" id="citys"></div>
 
 </div>
 
-<!-- LEFT MENU -->
+<!-- LEFT -->
 
-<div class="left-menu">
+<div class="left">
 
-<button class="mode-btn" onclick="randomStreet()">
-RANDOM STREET
+<button class="btn" onclick="randomStreet()">
+RANDOM
 </button>
 
-<button class="mode-btn" onclick="nextCity()">
-NEXT CITY
+<button class="btn" onclick="nextCity()">
+NEXT
 </button>
 
-<button class="mode-btn" onclick="nightMode()">
-NIGHT MODE
+<button class="btn" onclick="autoWalk()">
+AUTO WALK
 </button>
 
-<button class="mode-btn" onclick="cinemaMode()">
-CINEMA MODE
+<button class="btn" onclick="stopWalk()">
+STOP WALK
 </button>
 
-<button class="mode-btn" onclick="matrixMode()">
-MATRIX MODE
+<button class="btn" onclick="nightMode()">
+NIGHT
 </button>
 
-<button class="mode-btn" onclick="vhsMode()">
-VHS MODE
+<button class="btn" onclick="cinemaMode()">
+CINEMA
 </button>
 
-<button class="mode-btn" onclick="cyberpunkMode()">
-CYBERPUNK
+<button class="btn" onclick="matrixMode()">
+MATRIX
 </button>
 
-<button class="mode-btn" onclick="droneMode()">
-DRONE MODE
+<button class="btn" onclick="cyberpunkMode()">
+CYBER
 </button>
 
-<button class="mode-btn" onclick="resetMode()">
+<button class="btn" onclick="droneMode()">
+DRONE
+</button>
+
+<button class="btn" onclick="resetMode()">
 RESET
 </button>
 
 </div>
 
-<!-- STATUS -->
+<!-- RIGHT -->
 
-<div class="status" id="status">
-SYSTEM ONLINE<br>
-3D STREET NODE CONNECTED
+<div class="right">
+
+<div
+class="city-title"
+id="cityTitle">
+TOKYO
 </div>
 
-<!-- CITY -->
+<div class="info-line">
 
-<div class="city-label" id="cityLabel">
+<div class="label">
+WEATHER
+</div>
+
+<div
+class="value"
+id="temp">
++24°C
+</div>
+
+<div
+class="small"
+id="weatherText">
+clear sky
+</div>
+
+</div>
+
+<div class="info-line">
+
+<div class="label">
+AIR
+</div>
+
+<div
+class="value"
+id="air">
+38 AQI
+</div>
+
+<div
+class="small"
+id="airText">
+good quality
+</div>
+
+</div>
+
+<div class="info-line">
+
+<div class="label">
+POPULATION
+</div>
+
+<div
+class="value"
+id="population">
+37M
+</div>
+
+</div>
+
+<div
+class="guide"
+id="guide">
+
+AI WALK<br>
+standby...
+
+</div>
+
+</div>
+
+<!-- WALK -->
+
+<div
+class="walk"
+id="walk">
+
+AI SYSTEM ONLINE<br>
+standby mode
+
+</div>
+
+<!-- BIG CITY -->
+
+<div
+class="bigcity"
+id="bigcity">
 TOKYO
 </div>
 
@@ -426,7 +552,7 @@ TOKYO
 
 <script>
 
-/* ===== CITIES ===== */
+/* ===== 100 CITIES ===== */
 
 const cities=[
 
@@ -438,83 +564,161 @@ const cities=[
 "Berlin",
 "Rome",
 "Barcelona",
-"Amsterdam",
-"Prague",
-"Warsaw",
 "Dubai",
 "Istanbul",
 "Bangkok",
 "Singapore",
 "Seoul",
-"Hong Kong",
 "Sydney",
 "Toronto",
-"Rio de Janeiro",
-"Mexico City",
 "Cairo",
 "Mumbai",
 "Shanghai",
 "Los Angeles",
 "Chicago",
-"San Francisco",
-"Miami",
 "Lviv",
 "Odessa",
-"Kharkiv"
+"Kharkiv",
+"Dnipro",
+"Warsaw",
+"Prague",
+"Vienna",
+"Amsterdam",
+"Brussels",
+"Copenhagen",
+"Stockholm",
+"Helsinki",
+"Oslo",
+"Lisbon",
+"Madrid",
+"Valencia",
+"Seville",
+"Milan",
+"Naples",
+"Florence",
+"Munich",
+"Hamburg",
+"Frankfurt",
+"Zurich",
+"Budapest",
+"Athens",
+"Bucharest",
+"Sofia",
+"Belgrade",
+"Zagreb",
+"Sarajevo",
+"Skopje",
+"Tirana",
+"Reykjavik",
+"Dublin",
+"Edinburgh",
+"Manchester",
+"Liverpool",
+"Glasgow",
+"Birmingham",
+"San Francisco",
+"Seattle",
+"Miami",
+"Boston",
+"Houston",
+"Dallas",
+"Atlanta",
+"Detroit",
+"Phoenix",
+"Las Vegas",
+"Portland",
+"Denver",
+"Mexico City",
+"Rio de Janeiro",
+"Sao Paulo",
+"Buenos Aires",
+"Lima",
+"Santiago",
+"Bogota",
+"Caracas",
+"Havana",
+"Panama City",
+"Cape Town",
+"Johannesburg",
+"Nairobi",
+"Lagos",
+"Casablanca",
+"Tunis",
+"Algiers",
+"Jerusalem",
+"Tel Aviv",
+"Doha",
+"Riyadh",
+"Tehran",
+"Baghdad",
+"Karachi",
+"Delhi",
+"Kathmandu",
+"Hong Kong",
+"Taipei",
+"Jakarta"
 
 ];
 
-/* ===== COORDS ===== */
+/* ===== DATA ===== */
 
-const coords={
+const cityData={
 
-Tokyo:[35.6895,139.6917],
-Kyiv:[50.4501,30.5234],
-"New York":[40.7128,-74.0060],
-London:[51.5072,-0.1276],
-Paris:[48.8566,2.3522],
-Berlin:[52.52,13.405],
-Rome:[41.9028,12.4964],
-Barcelona:[41.3874,2.1686],
-Amsterdam:[52.3676,4.9041],
-Prague:[50.0755,14.4378],
-Warsaw:[52.2297,21.0122],
-Dubai:[25.2048,55.2708],
-Istanbul:[41.0082,28.9784],
-Bangkok:[13.7563,100.5018],
-Singapore:[1.3521,103.8198],
-Seoul:[37.5665,126.9780],
-"Hong Kong":[22.3193,114.1694],
-Sydney:[-33.8688,151.2093],
-Toronto:[43.6532,-79.3832],
-"Rio de Janeiro":[-22.9068,-43.1729],
-"Mexico City":[19.4326,-99.1332],
-Cairo:[30.0444,31.2357],
-Mumbai:[19.0760,72.8777],
-Shanghai:[31.2304,121.4737],
-"Los Angeles":[34.0522,-118.2437],
-Chicago:[41.8781,-87.6298],
-"San Francisco":[37.7749,-122.4194],
-Miami:[25.7617,-80.1918],
-Lviv:[49.8397,24.0297],
-Odessa:[46.4825,30.7233],
-Kharkiv:[49.9935,36.2304]
+Tokyo:{
+coords:[35.6895,139.6917],
+temp:"+24°C",
+weather:"clear sky",
+air:"38 AQI",
+airText:"good quality",
+population:"37M"
+},
+
+Kyiv:{
+coords:[50.4501,30.5234],
+temp:"+20°C",
+weather:"cloudy",
+air:"52 AQI",
+airText:"moderate quality",
+population:"3M"
+},
+
+London:{
+coords:[51.5072,-0.1276],
+temp:"+17°C",
+weather:"rain",
+air:"48 AQI",
+airText:"stable quality",
+population:"9M"
+},
+
+Paris:{
+coords:[48.8566,2.3522],
+temp:"+21°C",
+weather:"clear sky",
+air:"41 AQI",
+airText:"good quality",
+population:"11M"
+}
 
 };
 
 /* ===== ELEMENTS ===== */
 
-const frame=document.getElementById('street');
+const frame=
+document.getElementById('street');
 
-const citySelect=document.getElementById('citySelect');
+const citys=
+document.getElementById('citys');
 
 let currentIndex=0;
+
+let autoWalkInterval=null;
 
 /* ===== RENDER ===== */
 
 function renderCities(list){
 
-citySelect.innerHTML='';
+citys.innerHTML='';
 
 list.forEach((city,index)=>{
 
@@ -526,7 +730,7 @@ div.innerText=city;
 
 div.onclick=()=>openStreet(city,index);
 
-citySelect.appendChild(div);
+citys.appendChild(div);
 
 });
 
@@ -540,8 +744,11 @@ function openStreet(city,index){
 
 currentIndex=index;
 
-const lat=coords[city][0];
-const lng=coords[city][1];
+const data=
+cityData[city] || cityData["Tokyo"];
+
+const lat=data.coords[0];
+const lng=data.coords[1];
 
 const rLat=
 (lat+(Math.random()-.5)/100).toFixed(6);
@@ -552,14 +759,26 @@ const rLng=
 frame.src=
 `https://www.google.com/maps?q=&layer=c&cbll=${rLat},${rLng}&cbp=11,0,0,0,0&output=svembed`;
 
-document.getElementById('cityLabel').innerText=
+document.getElementById('cityTitle').innerText=
 city.toUpperCase();
 
-document.getElementById('status').innerHTML=
-`
-CONNECTED: ${city}<br>
-3D PANORAMA ACTIVE
-`;
+document.getElementById('bigcity').innerText=
+city.toUpperCase();
+
+document.getElementById('temp').innerText=
+data.temp;
+
+document.getElementById('weatherText').innerText=
+data.weather;
+
+document.getElementById('air').innerText=
+data.air;
+
+document.getElementById('airText').innerText=
+data.airText;
+
+document.getElementById('population').innerText=
+data.population;
 
 }
 
@@ -567,8 +786,9 @@ CONNECTED: ${city}<br>
 
 function filterCities(text){
 
-const filtered=cities.filter(city=>
-city.toLowerCase().includes(text.toLowerCase())
+const filtered=
+cities.filter(c=>
+c.toLowerCase().includes(text.toLowerCase())
 );
 
 renderCities(filtered);
@@ -605,6 +825,111 @@ currentIndex
 
 }
 
+/* ===== AUTO WALK ===== */
+
+function autoWalk(){
+
+clearInterval(autoWalkInterval);
+
+document.getElementById('walk').innerHTML=
+`
+AI AUTO WALK ACTIVE<br>
+urban navigation...
+`;
+
+autoWalkInterval=setInterval(()=>{
+
+const city=
+cities[currentIndex];
+
+const data=
+cityData[city] || cityData["Tokyo"];
+
+const lat=data.coords[0];
+const lng=data.coords[1];
+
+const headings=[
+
+0,
+45,
+90,
+135,
+180,
+225,
+270,
+315
+
+];
+
+const heading=
+headings[
+Math.floor(Math.random()*headings.length)
+];
+
+const zooms=[0,2,5];
+
+const zoom=
+zooms[
+Math.floor(Math.random()*zooms.length)
+];
+
+const rLat=
+(lat+(Math.random()-.5)/300).toFixed(6);
+
+const rLng=
+(lng+(Math.random()-.5)/300).toFixed(6);
+
+frame.src=
+`https://www.google.com/maps?q=&layer=c&cbll=${rLat},${rLng}&cbp=11,${heading},0,${zoom},0&output=svembed`;
+
+const routes=[
+
+"walking forward...",
+"crossing avenue...",
+"turning right...",
+"moving through district...",
+"approaching intersection...",
+"navigating downtown...",
+"scanning urban sector...",
+"moving toward neon zone..."
+
+];
+
+const random=
+routes[
+Math.floor(Math.random()*routes.length)
+];
+
+document.getElementById('guide').innerHTML=
+`
+AI WALK<br>
+${random}
+`;
+
+document.getElementById('walk').innerHTML=
+`
+AUTO WALK ACTIVE<br>
+${random}
+`;
+
+},7000);
+
+}
+
+/* ===== STOP ===== */
+
+function stopWalk(){
+
+clearInterval(autoWalkInterval);
+
+document.getElementById('walk').innerHTML=
+`
+AUTO WALK STOPPED<br>
+manual control
+`;
+
+}
+
 /* ===== MODES ===== */
 
 function nightMode(){
@@ -630,15 +955,6 @@ document.body.classList.add('glitch');
 
 }
 
-function vhsMode(){
-
-document.querySelector('.scan').style.opacity='.35';
-
-frame.style.filter=
-'contrast(1.3) saturate(.6) blur(.3px)';
-
-}
-
 function cyberpunkMode(){
 
 frame.style.filter=
@@ -649,7 +965,7 @@ frame.style.filter=
 function droneMode(){
 
 frame.style.filter=
-'grayscale(.4) contrast(1.5) brightness(.9)';
+'grayscale(.35) contrast(1.4)';
 
 }
 
